@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
-    <!-- <script src="http://demos.amitavroy.com/learningci/assets/js/xml2json.js" charset="UTF-8"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js" charset="utf-8"></script>
 
     <!-- App -->
@@ -19,7 +18,6 @@
     <script src="js/annyang-service.js"></script>
     <script src="js/weather-service.js"></script>
     <script src="js/map-service.js"></script>
-    <script src="js/giphy-service.js"></script>
     <!-- for subway -->
     <script src="js/subway-service.js"></script>
     <!-- for youtube -->
@@ -33,7 +31,6 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
-
   </head>
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
@@ -65,9 +62,8 @@
         <div class="map-container animate-grow" ng-show="focus == 'map'">
           <img class="map animate-grow" ng-src="{{map}}"/>
         </div>
-
-        <div class="map-container animate-grow" ng-show="focus == 'gif'">
-          <img class="map animate-grow" ng-src="{{gif}}"/>
+        <div class="map-container animate-grow" ng-show="focus == 'subway'">
+          <p>{{subwayinfo}}</p>
         </div>
         <div class="map-container animate-grow" ng-show="focus == 'youtube'">
           <iframe id="youtube_player" class="yt_player_iframe" width="100%" height="90%" ng-src="{{currentYoutubeUrl}}"  allowfullscreen="true" allowscriptaccess="always" frameborder="0"></iframe>
@@ -114,6 +110,8 @@
     </div>
     <div class="debug-info" ng-show="debug == true">
       <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
+      <button ng-click="focus = (focus == 'subway')?'default':'subway'">Subway</button>
+      <button ng-click="focus = (focus == 'youtube')?'default':'youtube'">Youtube</button>
       <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
       <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
       <button ng-click="debug = false">Close Debug</button>

@@ -3,13 +3,16 @@
 
   function SubwayService($http) {
     var service = {};
+    var SATURDAY_CODE = 2;
+    var SUNDAY_CODE = 3;
+    var OTHERDAY_CODE = 1;
     service.stationrow = null;
+
     service.init = function(station){
       return $http.get("http://openAPI.seoul.go.kr:8088/"+SUBWAY_API_KEY+"/xml/SearchInfoBySubwayNameService/1/5/"+station+"/").
       then(function(response) {
         var x2js = new X2JS();
         var jsonData = x2js.xml_str2json(response.data);
-        // console.log(service.stationcode.SearchInfoBySubwayNameService.row[0].STATION_CD)
         if(jsonData.SearchInfoBySubwayNameService.row){
           service.stationrow = jsonData.SearchInfoBySubwayNameService.row;
         }
@@ -52,7 +55,7 @@
       if(updown === "상행선"){
         return 1;
       }
-        return 2;
+      return 2;
     }
 
     var getWeekCode = function() {
@@ -60,18 +63,18 @@
       var today = now.getDay();
       //saturday
       if(today === 6){
-        return 2;
+        return SATURDAY_CODE;
       }
       //sunday
       if(today === 7){
-        return 3;
+        return SUNDAY_CODE;
       }
-      return 1;
+      return OTHERDAY_CODE;
     }
 
     var getStationCode = function(linecode){
       if(typeof service.stationrow.length == 'undefined'){
-          return service.stationrow.STATION_CD;
+        return service.stationrow.STATION_CD;
       }
       for(var i = 0; i < service.stationrow.length; i++){
         if(service.stationrow[i].LINE_NUM == linecode){

@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService,SubwayService,YoutubeService,HueService,$scope, $timeout,$sce) {
+  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, SubwayService, YoutubeService, HueService, $scope, $timeout, $sce) {
     var _this = this;
     var command = COMMANDS.ko;
     var DEFAULT_COMMAND_TEXT = command.default;
@@ -66,8 +66,6 @@
       AnnyangService.addCommand(command.whatcanisay, function() {
         console.debug("Here is a list of commands...");
         console.log(AnnyangService.commands);
-        var msg = new SpeechSynthesisUtterance('다음은 사용가능한 질문입니다');
-        window.speechSynthesis.speak(msg);
         $scope.focus = "commands";
 
       });
@@ -94,7 +92,7 @@
         $scope.focus = "map";
       });
 
-      AnnyangService.addCommand("*location" + command.map, function(location) {
+      AnnyangService.addCommand(command.locaiton, function(location) {
         console.debug("Getting map of", location);
         $scope.map = MapService.generateMap(location);
         $scope.focus = "map";
@@ -186,15 +184,11 @@
         SubwayService.init(station).then(function(){
           SubwayService.getArriveTime(linenumber,updown).then(function(data){
             if(data != null){
-              var result = data[0].ARRIVETIME + "에 " + data[0].SUBWAYNAME + "행 열차가 들어오겠습니다.";
-              var msg = new SpeechSynthesisUtterance(result);
-              window.speechSynthesis.speak(msg);
+              $scope.subwayinfo = data[0].ARRIVETIME + "에 " + data[0].SUBWAYNAME + "행 열차가 들어오겠습니다.";
             }else{
-
-              var result = "운행하는 열차가 존재 하지 않습니다."
-              var msg = new SpeechSynthesisUtterance(result);
-              window.speechSynthesis.speak(msg);
+              $scope.subwayinfo = "운행하는 열차가 존재 하지 않습니다."
             }
+            $scope.focus = "subway";
           });
         });
       });

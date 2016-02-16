@@ -6,7 +6,6 @@
         service.youtube = null;
 
         service.getYoutube = function(search_term){
-
           return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY).
               then(function(response) {
                   service.youtube = response.data;
@@ -21,6 +20,7 @@
             videoId = service.youtube.items[0].id.videoId;
             return videoId;
           }
+          //return default youtube
           return "M7lc1UVf-VE";
         };
         return service;
