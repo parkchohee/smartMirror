@@ -1,4 +1,4 @@
-# smart-mirror-ko
+smart-mirror-ko
 =========================
 smart-mirror korean version.
 
