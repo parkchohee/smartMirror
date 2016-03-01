@@ -1,9 +1,10 @@
-var FORCAST_API_KEY = "{API_KEY}";
-var SUBWAY_API_KEY = "{API_KEY}";
-var SOUNDCLOUD_APT_KEY = "{API_KEY}";
-var YOUTUBE_API_KEY = "{API_KEY}";
-var HUE_BASE = "{API_KEY}";
+var FORCAST_API_KEY = "{YOUR_KEY}";
+var SUBWAY_API_KEY = "{YOUR_KEY}";
+var SOUNDCLOUD_APT_KEY = "{YOUR_KEY}";
+var YOUTUBE_API_KEY = "{YOUR_KEY}";
+var HUE_BASE = "{YOUR_KEY}";
 var COMMANDS  = { "en" : {
+  "voice" : "UK English Female",
   "default" : 'Say "What can I say?" to see a list of commands...',
   "hi" : 'Hi, sexy!',
   "whatcanisay" : 'What can I say',
@@ -28,9 +29,11 @@ var COMMANDS  = { "en" : {
   "stopyoutube" : 'stop youtube',
   "subway" : 'show me *linenumber info at *station',
   "musicplay" : "play music",
-  "musicstop" : "stop music"
+  "musicstop" : "stop music",
+  "info" :  "Here is a list of commands..."
 },
   "ko" : {
+    "voice" : "Korean Female",
     "default" : '"사용 가능한 질문" 이라 말해 보세요',
     "hi" : '안녕 소은',
     "whatcanisay" : '사용가능한 질문',
@@ -39,7 +42,7 @@ var COMMANDS  = { "en" : {
     "wake" : '일어나',
     "debug" : '디버그 정보 보여 줘',
     "map" : '지도 보여 줘',
-    "locaiton" : "*location지도 보여 줘",
+    "locaiton" : '*location지도 보여 줘',
     "zoomin" : '지도 확대',
     "zoomout" : '지도 축소',
     "zoomvalue" : '*value값으로지도 설정',
@@ -55,6 +58,7 @@ var COMMANDS  = { "en" : {
     "stopyoutube" : '동영상 (꺼 봐)(꺼 줘)(정지)(중지)(그만)(꺼져)',
     "subway" : '*station역 *linenumber(호)선 *updown',
     "musicplay" : "음악 (재생)(켜 줘)",
-    "musicstop" : "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)"
+    "musicstop" : "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
+    "info" : "다음은 사용 가능한 질문입니다."
   }
 };

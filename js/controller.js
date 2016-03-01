@@ -65,6 +65,9 @@
       // List commands
       AnnyangService.addCommand(command.whatcanisay, function() {
         console.debug("Here is a list of commands...");
+        if(responsiveVoice.voiceSupport()) {
+          responsiveVoice.speak(command.info,command.voice);
+        }
         console.log(AnnyangService.commands);
         $scope.focus = "commands";
 
