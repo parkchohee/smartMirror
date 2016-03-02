@@ -6,7 +6,7 @@
         service.youtube = null;
 
         service.getYoutube = function(search_term){
-          return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY + "&maxResults=30&&type=playlist").
+          return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY + "&maxResults=30").
               then(function(response) {
                   service.youtube = response.data;
                   console.log(service.youtube);
@@ -22,20 +22,9 @@
             return videoId;
           }
           //return default youtube
-          return "M7lc1UVf-VE";
+          return null;
         };
 
-        service.getPlaylistId = function(){
-          var playlitId;
-          if(service.youtube.items.length > 0 ){
-            var r = Math.floor((Math.random() * service.youtube.items.length) + 1);
-            playlitId = service.youtube.items[r].id.playlistId;
-            return playlitId;
-          }
-          //return default youtube
-          return "M7lc1UVf-VE";
-        };
-        
         return service;
     }
 

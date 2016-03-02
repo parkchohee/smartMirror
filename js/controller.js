@@ -168,11 +168,9 @@
 
         YoutubeService.getYoutube(term).then(function(){
           if(term){
-            //var videoId = YoutubeService.getVideoId()
-            var playlistId = YoutubeService.getPlaylistId();
+            var videoId = YoutubeService.getVideoId()
             $scope.focus = "youtube";
-            //$scope.youtubeurl = "http://www.youtube.com/embed/" + videoId + "?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
-            $scope.youtubeurl = "http://www.youtube.com/videoseries?list=" + playlistId + "&autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
+            $scope.youtubeurl = "http://www.youtube.com/embed/" + videoId + "?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
