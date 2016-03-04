@@ -9,6 +9,9 @@ smart-mirror korean version.
 #### Reference ####
 Evan Cohen smart-mirror http://smart-mirror.io/
 
+#### Project Review ####
+http://mojosoeun.tistory.com/136
+
 #### Licence ####
 MIT 
 
