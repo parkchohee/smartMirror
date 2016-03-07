@@ -166,7 +166,7 @@
 
       AnnyangService.addCommand(command.playyoutube, function(term) {
 
-        YoutubeService.getYoutube(term).then(function(){
+        YoutubeService.getYoutube(term,'video').then(function(){
           if(term){
             var videoId = YoutubeService.getVideoId()
             $scope.focus = "youtube";
@@ -174,7 +174,18 @@
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
+      });
 
+      AnnyangService.addCommand(command.ytbplaylist, function(term) {
+
+        YoutubeService.getYoutube(term,'playlist').then(function(){
+          if(term){
+            var playlistId = YoutubeService.getPlaylistId()
+            $scope.focus = "youtube";
+            $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&list="+playlistId
+            $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
+          }
+        });
       });
 
       AnnyangService.addCommand(command.stopyoutube, function() {

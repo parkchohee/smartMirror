@@ -1,8 +1,8 @@
-var FORCAST_API_KEY = "{YOUR_KEY}";
-var SUBWAY_API_KEY = "{YOUR_KEY}";
-var SOUNDCLOUD_APT_KEY = "{YOUR_KEY}";
-var YOUTUBE_API_KEY = "{YOUR_KEY}";
-var HUE_BASE = "{YOUR_KEY}";
+var FORCAST_API_KEY = "{API_KEY}";
+var SUBWAY_API_KEY = "{API_KEY}";
+var SOUNDCLOUD_APT_KEY = "{API_KEY}";
+var YOUTUBE_API_KEY = "{API_KEY}";
+var HUE_BASE = "{}";
 var COMMANDS  = { "en" : {
   "voice" : "UK English Female",
   "default" : 'Say "What can I say?" to see a list of commands...',
@@ -25,7 +25,8 @@ var COMMANDS  = { "en" : {
   "clear" : 'Clear results',
   "time" : 'what time is it',
   "light" : '(turn) (the) :state (the) light(s) *action',
-  "playyoutube" : 'play youtube',
+  "playyoutube" : 'play *term youtube',
+  "ytbplaylist" : '*term playlist',
   "stopyoutube" : 'stop youtube',
   "subway" : 'show me *linenumber info at *station',
   "musicplay" : "play music",
@@ -55,6 +56,7 @@ var COMMANDS  = { "en" : {
     "time" : '지금 몇 시',
     "light" : '불 :state *action (해)줘',
     "playyoutube" : '*term 동영상 (재생)(켜 줘)(플레이)(틀어 줘)(보여 줘)',
+    "ytbplaylist" : '*term 플레이어 (재생)(켜 줘)(플레이)(틀어 줘)(보여 줘)',
     "stopyoutube" : '동영상 (꺼 봐)(꺼 줘)(정지)(중지)(그만)(꺼져)',
     "subway" : '*station역 *linenumber(호)선 *updown',
     "musicplay" : "음악 (재생)(켜 줘)",

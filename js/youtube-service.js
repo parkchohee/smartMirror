@@ -5,8 +5,8 @@
         var service = {};
         service.youtube = null;
 
-        service.getYoutube = function(search_term){
-          return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY + "&maxResults=30").
+        service.getYoutube = function(search_term,type){
+          return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY + "&maxResults=30&type="+type).
               then(function(response) {
                   service.youtube = response.data;
                   console.log(service.youtube);
@@ -24,6 +24,16 @@
           //return default youtube
           return null;
         };
+
+        service.getPlaylistId = function(){
+          var playlistId;
+          if(service.youtube.items.length > 0 ){
+            playlistId = service.youtube.items[0].id.playlistId;
+            return playlistId;
+          }
+          //return default youtube
+          return null;
+        }
 
         return service;
     }
