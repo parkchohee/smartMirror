@@ -182,7 +182,7 @@
           if(term){
             var playlistId = YoutubeService.getPlaylistId()
             $scope.focus = "youtube";
-            $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&list="+playlistId
+            $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list="+playlistId
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
