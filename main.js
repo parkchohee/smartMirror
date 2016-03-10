@@ -1,3 +1,5 @@
+/* global __dirname */
+/* global process */
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
@@ -50,8 +52,10 @@ app.on('ready', function() {
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // Open the DevTools if run with "npm start dev"
+  if(process.argv[2] == "dev"){
+    mainWindow.webContents.openDevTools();
+  }
 
 
   // Emitted when the window is closed.
