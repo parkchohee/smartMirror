@@ -27,7 +27,7 @@
             annyang.setLanguage(langCode);
         };
 
-        service.setLanguage(config.language);
+        service.setLanguage("ko");
 
         service.start = function(listening, interimResult, result) {
             annyang.addCommands(service.commands);
