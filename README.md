@@ -6,6 +6,8 @@ smart-mirror korean version.
 1. npm install
 2. npm start 
 
+http://docs.smart-mirror.io/
+
 #### Reference ####
 Evan Cohen smart-mirror http://smart-mirror.io/
 
