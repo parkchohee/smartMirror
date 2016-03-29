@@ -65,9 +65,6 @@
       // List commands
       AnnyangService.addCommand(command.whatcanisay, function() {
         console.debug("Here is a list of commands...");
-        if(responsiveVoice.voiceSupport()) {
-          responsiveVoice.speak(command.info,command.voice);
-        }
         console.log(AnnyangService.commands);
         $scope.focus = "commands";
 
@@ -118,7 +115,6 @@
       });
 
       AnnyangService.addCommand(command.zoomreset, function() {
-        console.debug("Zoooommmmmzzz00000!!!");
         $scope.map = MapService.reset();
         $scope.focus = "map";
       });

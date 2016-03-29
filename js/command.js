@@ -32,7 +32,7 @@ var COMMANDS  = { "en" : {
     "voice" : "Korean Female",
     "default" : '"사용 가능한 질문" 이라 말해 보세요',
     "hi" : '안녕 소은',
-    "whatcanisay" : '사용가능한 질문',
+    "whatcanisay" : '사용 가능한 질문',
     "home" : '(집)(메인 화면)',
     "sleep" : '잠자러가',
     "wake" : '일어나',
