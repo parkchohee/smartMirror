@@ -44,7 +44,7 @@
             // Add human readable info to info
             for (var i = 0; i < service.forcast.data.daily.data.length; i++) {
                 service.forcast.data.daily.data[i].day = moment.unix(service.forcast.data.daily.data[i].time).format('ddd');
-            };
+            }
             return service.forcast.data.daily;
         }
 
