@@ -36,13 +36,13 @@
             if (typeof(listening) == "function") {
                 annyang.addCallback('start', function(){$rootScope.$apply(listening(true));});
                 annyang.addCallback('end', function(data){console.log("End", data)});
-            };
+            }
             if (typeof(interimResult) == "function") {
                 annyang.addCallback('interimResult', function(data){$rootScope.$apply(interimResult(data));});
-            };
+            }
             if (typeof(result) == "function") {
                 annyang.addCallback('result', function(data){$rootScope.$apply(result(data));});
-            };
+            }
         };
 
         return service;
