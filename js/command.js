@@ -24,7 +24,9 @@ var COMMANDS  = { "en" : {
   "ytbplaylist" : '*term playlist',
   "stopyoutube" : 'stop youtube',
   "subway" : 'show me *linenumber info at *station',
-  "musicplay" : "play music",
+  "musicplay" : "play music *track",
+  "musicreplay" : "replay music",
+  "musicresume" : "resume music",
   "musicstop" : "stop music",
   "info" :  "Here is a list of commands..."
 },
@@ -54,7 +56,9 @@ var COMMANDS  = { "en" : {
     "ytbplaylist" : '*term 플레이어 (재생)(켜 줘)(플레이)(틀어 줘)(보여 줘)',
     "stopyoutube" : '동영상 (꺼 봐)(꺼 줘)(정지)(중지)(그만)(꺼져)',
     "subway" : '*station역 *linenumber(호)선 *updown',
-    "musicplay" : "음악 (재생)(켜 줘)",
+    "musicplay" : "*track 음악 (재생)(켜 줘)",
+    "musicreplay" : "음악 다시 시작",
+    "musicresume" : "음악 다시 재생",
     "musicstop" : "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
     "info" : "다음은 사용 가능한 질문입니다."
   }

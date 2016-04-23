@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, SubwayService, YoutubeService, HueService, $scope, $timeout, $sce) {
+  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, SubwayService, YoutubeService, HueService, SoundCloudService,$scope, $timeout, $sce) {
     var _this = this;
     var command = COMMANDS.ko;
     var DEFAULT_COMMAND_TEXT = command.default;
@@ -13,16 +13,6 @@
     $scope.interimResult = DEFAULT_COMMAND_TEXT;
 
     $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
-
-    SC.initialize({
-      client_id: SOUNDCLOUD_APT_KEY
-    });
-
-    $scope.musicplay = null;
-    SC.stream('/tracks/293').then(function(player){
-      $scope.musicplay = player
-    });
-
     //Update the time
     var tick = function() {
       $scope.date = new Date();
@@ -40,6 +30,8 @@
       tick();
       restCommand();
 
+      var playing = false, sound;
+			SoundCloudService.init();
       //Get our location and then get the weather for our location
       GeolocationService.getLocation().then(function(geoposition){
         console.log("Geoposition", geoposition);
@@ -151,12 +143,44 @@
       });
 
 
-      AnnyangService.addCommand(command.musicplay, function(state, action) {
-        // // stream track id 293
-        $scope.musicplay.play();
+      AnnyangService.addCommand(command.musicplay, function(track) {
+        SoundCloudService.searchSoundCloud(track).then(function(response){
+          SC.stream('/tracks/' + response[0].id).then(function(player){
+            player.play();
+            sound = player;
+            playing = true;
+          });
+
+          if (response[0].artwork_url){
+            $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
+          } else {
+            $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+          }
+          $scope.scTrack = response[0].title;
+          $scope.focus = "music";
+          SoundCloudService.startVisualizer();
+        });
       });
 
-      AnnyangService.addCommand(command.musicstop, function(state, action) {
+      AnnyangService.addCommand(command.musicstop, function() {
+        sound.pause();
+        SoundCloudService.stopVisualizer();
+        $scope.focus = "default";
+      });
+
+      AnnyangService.addCommand(command.musicresume, function() {
+        sound.play();
+        SoundCloudService.startVisualizer();
+        $scope.focus = "music";
+      });
+      AnnyangService.addCommand(command.musicreplay, function() {
+        sound.seek(0);
+        sound.play();
+        SoundCloudService.startVisualizer();
+        $scope.focus = "music";
+      });
+
+      AnnyangService.addCommand(command.musicstop, function() {
         $scope.musicplay.pause();
       });
 
