@@ -14,7 +14,6 @@
       });
     }
 
-    //Returns the soundcloud search results for the given query
     service.searchSoundCloud = function(query) {
       return $http.get('https://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_KEY + '&q=' + query + '&limit=1').
       then(function(response) {
