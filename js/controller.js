@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, SubwayService, YoutubeService, HueService, SoundCloudService,$scope, $timeout, $sce) {
+  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, SubwayService, YoutubeService, HueService, SoundCloudService, ShowAddService, $scope, $timeout, $sce) {
     var _this = this;
     var command = COMMANDS.ko;
     var DEFAULT_COMMAND_TEXT = command.default;
@@ -71,6 +71,12 @@
         $scope.focus = "sleep";
       });
 
+      AnnyangService.addCommand(command.showAdd, function() {
+        $scope.add = ShowAddService.generateAdd();
+        $scope.focus = "add";
+      });
+
+      AnnyangService.addCommand(command.noshowAdd, defaultView);
       // Go back to default view
       AnnyangService.addCommand(command.wake, defaultView);
 
