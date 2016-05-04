@@ -19,16 +19,27 @@
       $timeout(tick, 1000 * 60);
     };
 
+    var timer;
+    var timeOutView = function () {
+      $timeout.cancel(timer);
+
+      timer = $timeout(function(){
+        $scope.add = ShowAddService.generateAdd();
+        $scope.focus = "add";
+      },300000);
+    };
+
     // Reset the command text
     var restCommand = function(){
       $scope.interimResult = DEFAULT_COMMAND_TEXT;
-    }
+    };
 
     _this.init = function() {
       $scope.map = MapService.generateMap("Seoul,Korea");
       _this.clearResults();
       tick();
       restCommand();
+      timeOutView();
 
       var playing = false, sound;
 			SoundCloudService.init();
@@ -44,7 +55,7 @@
           //this doesn't acutually updat the UI yet
           //$timeout(WeatherService.refreshWeather, 3600000);
         });
-      })
+      });
 
       // Hue communication
       HueService.init();
@@ -52,14 +63,15 @@
       var defaultView = function() {
         console.debug("Ok, going to default view...");
         $scope.focus = "default";
-      }
+        timeOutView();
+      };
 
       // List commands
       AnnyangService.addCommand(command.whatcanisay, function() {
         console.debug("Here is a list of commands...");
         console.log(AnnyangService.commands);
         $scope.focus = "commands";
-
+        timeOutView();
       });
 
       // Go back to default view
@@ -69,11 +81,13 @@
       AnnyangService.addCommand(command.sleep, function() {
         console.debug("Ok, going to sleep...");
         $scope.focus = "sleep";
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.showAdd, function() {
         $scope.add = ShowAddService.generateAdd();
         $scope.focus = "add";
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.noshowAdd, defaultView);
@@ -83,69 +97,83 @@
       AnnyangService.addCommand(command.debug, function() {
         console.debug("Boop Boop. Showing debug info...");
         $scope.debug = true;
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.map, function() {
         console.debug("Going on an adventure?");
-        $scope.focus = "map";
+        $scope.focus = "map";  timeOutView();
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.locaiton, function(location) {
         console.debug("Getting map of", location);
         $scope.map = MapService.generateMap(location);
         $scope.focus = "map";
+
+        timeOutView();
       });
 
       // Zoom in map
       AnnyangService.addCommand(command.zoomin, function() {
         console.debug("Zoooooooom!!!");
         $scope.map = MapService.zoomIn();
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.zoomout, function() {
         console.debug("Moooooooooz!!!");
         $scope.map = MapService.zoomOut();
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.zoomvalue, function(value) {
         console.debug("Moooop!!!", value);
         $scope.map = MapService.zoomTo(value);
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.zoomreset, function() {
         $scope.map = MapService.reset();
         $scope.focus = "map";
+        timeOutView();
       });
 
       // Change name
       AnnyangService.addCommand(command.name, function(name) {
         console.debug("Hi", name, "nice to meet you");
         $scope.user.name = name;
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.task, function(task) {
         console.debug("I'll remind you to", task);
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.reminder, function() {
         console.debug("Clearing reminders");
+        timeOutView();
       });
 
       // Clear log of commands
       AnnyangService.addCommand(command.clear, function(task) {
         console.debug("Clearing results");
         _this.clearResults()
+        timeOutView();
       });
 
       // Check the time
       AnnyangService.addCommand(command.time, function(task) {
         console.debug("It is", moment().format('h:mm:ss a'));
         _this.clearResults();
+        timeOutView();
       });
 
       // Turn lights off
       AnnyangService.addCommand(command.light, function(state, action) {
         HueService.performUpdate(state + " " + action);
+        timeOutView();
       });
 
 
@@ -166,58 +194,66 @@
           $scope.focus = "music";
           SoundCloudService.startVisualizer();
         });
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.musicstop, function() {
         sound.pause();
         SoundCloudService.stopVisualizer();
         $scope.focus = "default";
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.musicresume, function() {
         sound.play();
         SoundCloudService.startVisualizer();
         $scope.focus = "music";
+        timeOutView();
       });
       AnnyangService.addCommand(command.musicreplay, function() {
         sound.seek(0);
         sound.play();
         SoundCloudService.startVisualizer();
         $scope.focus = "music";
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.musicstop, function() {
         $scope.musicplay.pause();
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.playyoutube, function(term) {
 
         YoutubeService.getYoutube(term,'video').then(function(){
           if(term){
-            var videoId = YoutubeService.getVideoId()
+            var videoId = YoutubeService.getVideoId();
             $scope.focus = "youtube";
             $scope.youtubeurl = "http://www.youtube.com/embed/" + videoId + "?autoplay=1&enablejsapi=1&version=3&playerapiid=ytplayer"
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.ytbplaylist, function(term) {
 
         YoutubeService.getYoutube(term,'playlist').then(function(){
           if(term){
-            var playlistId = YoutubeService.getPlaylistId()
+            var playlistId = YoutubeService.getPlaylistId();
             $scope.focus = "youtube";
             $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list="+playlistId
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.stopyoutube, function() {
         var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
         iframe.postMessage('{"event":"command","func":"' + 'stopVideo' +   '","args":""}', '*');
         $scope.focus = "default";
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.subway, function(station,linenumber,updown) {
@@ -231,16 +267,19 @@
             $scope.focus = "subway";
           });
         });
+        timeOutView();
       });
 
       AnnyangService.addCommand(command.term, function(term) {
         console.debug("Showing", term);
+        timeOutView();
       });
 
       // Fallback for all commands
       AnnyangService.addCommand('*allSpeech', function(allSpeech) {
         console.debug(allSpeech);
         _this.addResult(allSpeech);
+        timeOutView();
       });
 
       var resetCommandTimeout;
