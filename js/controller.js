@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, SubwayService, YoutubeService, HueService, SoundCloudService, ShowAddService, $scope, $timeout, $sce) {
+  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, CameraService, SubwayService, YoutubeService, HueService, SoundCloudService, ShowAddService, $scope, $timeout, $sce) {
     var _this = this;
     var command = COMMANDS.ko;
     var DEFAULT_COMMAND_TEXT = command.default;
@@ -83,6 +83,20 @@
         $scope.focus = "sleep";
         timeOutView();
       });
+
+
+
+      AnnyangService.addCommand(command.cameraOn, function() {
+
+        $scope.v = CameraService.generateCamera();
+        console.log($scope.v);
+        $scope.focus = "camera";
+        timeOutView();
+      });
+
+      AnnyangService.addCommand(command.cameraOff, defaultView );
+
+
 
       AnnyangService.addCommand(command.showAdd, function() {
         $scope.add = ShowAddService.generateAdd();
