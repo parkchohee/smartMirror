@@ -62,6 +62,8 @@ var COMMANDS  = { "en" : {
     "musicstop" : "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
     "showAdd" : "광고 켜 줘",
     "noshowAdd" : "광고 (꺼 줘)(꺼 봐)(꺼져)",
+    "cameraOn" : "카메라 (켜 줘)",
+    "cameraOff" : "카메라 (꺼 줘)(꺼져)",
     "info" : "다음은 사용 가능한 질문입니다."
   }
 };
