@@ -10,7 +10,7 @@
 </head>
 <body ng-controller="MirrorCtrl as commands">
   <div class="top">
-    <div class="top-left">
+    <div class="top-left" ng-show="focus != 'camera'">
       <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
       <div class="time">{{date | date : 'hh:mm a'}}</div>
     </div>
@@ -32,7 +32,7 @@
   </div>
   <div class="container">
     <div class="middle-center">
-      <h1>{{complement}}</h1>
+      <h1 ng-show="focus != 'camera'">{{complement}}</h1>
       <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
       <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
       <div class="contents-box map animate-grow" ng-show="focus == 'map'">
@@ -42,7 +42,7 @@
         <img class="add animate-grow" ng-src="{{add}}"/>
       </div>
       <div class="contents-box add animate-grow" ng-show="focus == 'camera'">
-        <video id="v"></video>
+        <video id="v" class="videoView"></video>
       </div>
       <div class="contents-box subway animate-grow" ng-show="focus == 'subway'">
         <p>{{subwayinfo}}</p>

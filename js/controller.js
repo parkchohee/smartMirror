@@ -84,12 +84,17 @@
         timeOutView();
       });
 
+      // name Setting
+      AnnyangService.addCommand(command.settingName, function(setName) {
+        $scope.complement = setName;
+
+        timeOutView();
+      });
 
 
       AnnyangService.addCommand(command.cameraOn, function() {
 
         $scope.v = CameraService.generateCamera();
-        console.log($scope.v);
         $scope.focus = "camera";
         timeOutView();
       });
@@ -116,7 +121,7 @@
 
       AnnyangService.addCommand(command.map, function() {
         console.debug("Going on an adventure?");
-        $scope.focus = "map";  timeOutView();
+        $scope.focus = "map";
         timeOutView();
       });
 

@@ -19,7 +19,6 @@
         }
 
         service.generateCamera = function() {
-            console.log("aa");
 
             if( userMedia() ) {
                 var videoPlaying = false;
