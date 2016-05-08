@@ -6,7 +6,10 @@
   <!-- Styles and Resources -->
   <link rel="shortcut icon" href="favicon.ico" />
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
+  <link href='css/demo.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
   <link rel="stylesheet" href="css/main.css" />
+
 </head>
 <body ng-controller="MirrorCtrl as commands">
   <div class="top">
@@ -39,7 +42,16 @@
         <img class="map animate-grow" ng-src="{{map}}"/>
       </div>
       <div class="contents-box add animate-grow" ng-show="focus == 'add'">
-        <img class="add animate-grow" ng-src="{{add}}"/>
+
+        <div class="carousel-demo">
+          <ul rn-carousel rn-carousel-index="3" rn-carousel-auto-slide="3" class="carousel5">
+            <li><img src="image/a.jpg"></li>
+            <li><img src="image/b.jpg"></li>
+            <li><img src="image/c.jpg"></li>
+          </ul>
+        </div>
+
+
       </div>
       <div class="contents-box add animate-grow" ng-show="focus == 'camera'">
         <video id="v" class="videoView"></video>
@@ -121,6 +133,8 @@
   <!-- Libraries -->
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
   <script src="bower_components/moment/min/moment.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/xml2json/xml2json.js"></script>
