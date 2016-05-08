@@ -9,7 +9,9 @@
         service.show = null;
 
         service.generateAdd = function() {
-            return "image/a.jpg";
+            return [{image : "image/a.jpg"},
+                {image : "image/b.jpg"},
+                {image : "image/c.jpg"}];
         };
 
         return service;
