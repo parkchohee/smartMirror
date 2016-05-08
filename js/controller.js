@@ -24,9 +24,9 @@
       $timeout.cancel(timer);
 
       timer = $timeout(function(){
-        $scope.add = ShowAddService.generateAdd();
+        $scope.slides = ShowAddService.generateAdd();
         $scope.focus = "add";
-      },300000);
+      },3000);
     };
 
     // Reset the command text
