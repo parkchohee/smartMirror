@@ -64,6 +64,7 @@ var COMMANDS  = { "en" : {
     "noshowAdd" : "광고 (꺼 줘)(꺼 봐)(꺼져)",
     "cameraOn" : "카메라 (켜 줘)",
     "cameraOff" : "카메라 (꺼 줘)(꺼져)",
+    "settingName" : "이름 설정 *setName",
     "info" : "다음은 사용 가능한 질문입니다."
   }
 };

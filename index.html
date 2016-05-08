@@ -6,11 +6,14 @@
   <!-- Styles and Resources -->
   <link rel="shortcut icon" href="favicon.ico" />
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
+  <link href='css/demo.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
   <link rel="stylesheet" href="css/main.css" />
+
 </head>
 <body ng-controller="MirrorCtrl as commands">
   <div class="top">
-    <div class="top-left">
+    <div class="top-left" ng-show="focus != 'camera'">
       <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
       <div class="time">{{date | date : 'hh:mm a'}}</div>
     </div>
@@ -32,17 +35,23 @@
   </div>
   <div class="container">
     <div class="middle-center">
-      <h1>{{complement}}</h1>
+      <h1 ng-show="focus != 'camera'">{{complement}}</h1>
       <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
       <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
       <div class="contents-box map animate-grow" ng-show="focus == 'map'">
         <img class="map animate-grow" ng-src="{{map}}"/>
       </div>
       <div class="contents-box add animate-grow" ng-show="focus == 'add'">
-        <img class="add animate-grow" ng-src="{{add}}"/>
+        <div class="carousel-demo">
+          <ul rn-carousel rn-carousel-index="3" rn-carousel-auto-slide="3" class="carousel5">
+            <li ng-repeat="slide in slides">
+              <img  ng-src="{{slide.image}}">
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="contents-box add animate-grow" ng-show="focus == 'camera'">
-        <video id="v"></video>
+        <video id="v" class="videoView"></video>
       </div>
       <div class="contents-box subway animate-grow" ng-show="focus == 'subway'">
         <p>{{subwayinfo}}</p>
@@ -121,6 +130,8 @@
   <!-- Libraries -->
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
   <script src="bower_components/moment/min/moment.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/xml2json/xml2json.js"></script>

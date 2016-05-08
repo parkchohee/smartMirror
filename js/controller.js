@@ -84,27 +84,39 @@
         timeOutView();
       });
 
-
-
-      AnnyangService.addCommand(command.cameraOn, function() {
-
-        $scope.v = CameraService.generateCamera();
-        console.log($scope.v);
-        $scope.focus = "camera";
+      // name Setting
+      AnnyangService.addCommand(command.settingName, function(setName) {
+        // setName
+        $scope.complement = setName;
         timeOutView();
       });
 
+      // camera On
+      AnnyangService.addCommand(command.cameraOn, function() {
+        // create cameraView
+        $scope.v = CameraService.generateCamera();
+        // visible to camera
+        $scope.focus = "camera";
+        // timeOut (5min) start
+        timeOutView();
+      });
+
+      // camera Off and Go back to default view
       AnnyangService.addCommand(command.cameraOff, defaultView );
 
-
-
+      // showAdd
       AnnyangService.addCommand(command.showAdd, function() {
-        $scope.add = ShowAddService.generateAdd();
+        // create slides array
+        $scope.slides = ShowAddService.generateAdd();
+        // visible to addView
         $scope.focus = "add";
+        // timeOut (5min) start
         timeOutView();
       });
 
+      // showAdd Off and go back to default view
       AnnyangService.addCommand(command.noshowAdd, defaultView);
+
       // Go back to default view
       AnnyangService.addCommand(command.wake, defaultView);
 
@@ -116,7 +128,7 @@
 
       AnnyangService.addCommand(command.map, function() {
         console.debug("Going on an adventure?");
-        $scope.focus = "map";  timeOutView();
+        $scope.focus = "map";
         timeOutView();
       });
 
