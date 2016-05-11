@@ -24,6 +24,9 @@
       $timeout.cancel(timer);
 
       timer = $timeout(function(){
+        $scope.focus = "youtube";
+        $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list=UUFQMG01CZHj5-XrcpKuLarg";
+        $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
 
       },300000);
     };
@@ -116,8 +119,7 @@
           $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
 
         });
-        // timeOut (5min) start
-        timeOutView();
+
       });
 
       // showAdd Off and go back to default view
