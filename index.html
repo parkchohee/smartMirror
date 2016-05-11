@@ -41,15 +41,6 @@
       <div class="contents-box map animate-grow" ng-show="focus == 'map'">
         <img class="map animate-grow" ng-src="{{map}}"/>
       </div>
-      <div class="contents-box add animate-grow" ng-show="focus == 'add'">
-        <div class="carousel-demo">
-          <ul rn-carousel rn-carousel-index="3" rn-carousel-auto-slide="3" class="carousel5">
-            <li ng-repeat="slide in slides">
-              <img  ng-src="{{slide.image}}">
-            </li>
-          </ul>
-        </div>
-      </div>
       <div class="contents-box add animate-grow" ng-show="focus == 'camera'">
         <video id="v" class="videoView"></video>
       </div>
@@ -64,7 +55,7 @@
         <h2 class="sc">{{scTrack}}</h2>
       </div>
       <div class="contents-box map animate-grow" ng-show="focus == 'youtube'">
-        <iframe id="youtube_player" class="yt_player_iframe" width="100%" height="90%" ng-src="{{currentYoutubeUrl}}"  allowfullscreen="true" allowscriptaccess="always" frameborder="0"></iframe>
+        <iframe id="youtube_player" class="yt_player_iframe" width="90%" height="90%" ng-src="{{currentYoutubeUrl}}"  allowfullscreen="true" allowscriptaccess="always" frameborder="0"></iframe>
       </div>
     </div>
     <div class="bottom-center">
@@ -130,8 +121,6 @@
   <!-- Libraries -->
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
   <script src="bower_components/moment/min/moment.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/xml2json/xml2json.js"></script>

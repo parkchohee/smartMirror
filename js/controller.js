@@ -24,8 +24,7 @@
       $timeout.cancel(timer);
 
       timer = $timeout(function(){
-        $scope.add = ShowAddService.generateAdd();
-        $scope.focus = "add";
+
       },300000);
     };
 
@@ -107,15 +106,27 @@
       // showAdd
       AnnyangService.addCommand(command.showAdd, function() {
         // create slides array
-        $scope.slides = ShowAddService.generateAdd();
-        // visible to addView
-        $scope.focus = "add";
+        ShowAddService.getYoutube().then(function(){
+
+          //var playlistId = ShowAddService.getPlaylistId();
+          //console.log(playlistId);
+          $scope.focus = "youtube";
+          $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list=UUFQMG01CZHj5-XrcpKuLarg";
+          //$scope.youtubeurl = "https://www.youtube.com/embed/videoseries?list=UUFQMG01CZHj5-XrcpKuLarg&autoplay=1";
+          $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
+
+        });
         // timeOut (5min) start
         timeOutView();
       });
 
       // showAdd Off and go back to default view
-      AnnyangService.addCommand(command.noshowAdd, defaultView);
+      AnnyangService.addCommand(command.noshowAdd, function() {
+        var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+        iframe.postMessage('{"event":"command","func":"' + 'stopVideo' +   '","args":""}', '*');
+        $scope.focus = "default";
+        timeOutView();
+      });
 
       // Go back to default view
       AnnyangService.addCommand(command.wake, defaultView);

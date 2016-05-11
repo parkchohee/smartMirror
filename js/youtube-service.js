@@ -4,6 +4,7 @@
     function YoutubeService($http) {
         var service = {};
         service.youtube = null;
+        var YOUTUBE_API_KEY = 'AIzaSyDs2WRLjm3Cn1V91AYPXYfguwqOyLVovxo';
 
         service.getYoutube = function(search_term,type){
           return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY + "&maxResults=30&type="+type).
