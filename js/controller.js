@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, CameraService, SubwayService, YoutubeService, HueService, SoundCloudService, ShowAddService, $scope, $timeout, $sce) {
+  function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, CameraService, SubwayService, YoutubeService, HueService, SoundCloudService, $scope, $timeout, $sce) {
     var _this = this;
     var command = COMMANDS.ko;
     var DEFAULT_COMMAND_TEXT = command.default;
@@ -19,15 +19,21 @@
       $timeout(tick, 1000 * 60);
     };
 
+    // 타이머
     var timer;
     var timeOutView = function () {
+      // 이전의 타이머를 삭제
       $timeout.cancel(timer);
 
+      // 이전의 광고 url 삭제
+      $scope.youtubeurl = "";
+      $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
+
+      // 5분 경과 후 광고 실행
       timer = $timeout(function(){
         $scope.focus = "youtube";
-        $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list=UUFQMG01CZHj5-XrcpKuLarg";
+        $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list=UUFQMG01CZHj5-XrcpKuLarg";    //$scope.youtubeurl = "https://www.youtube.com/embed/videoseries?list=UUFQMG01CZHj5-XrcpKuLarg&autoplay=1";
         $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
-
       },300000);
     };
 
@@ -89,6 +95,7 @@
       // name Setting
       AnnyangService.addCommand(command.settingName, function(setName) {
         // setName
+        // 이름을 설정한다.
         $scope.complement = setName;
         timeOutView();
       });
@@ -106,23 +113,14 @@
       // camera Off and Go back to default view
       AnnyangService.addCommand(command.cameraOff, defaultView );
 
-      // showAdd
+      // showAd
       AnnyangService.addCommand(command.showAdd, function() {
-        // create slides array
-        ShowAddService.getYoutube().then(function(){
-
-          //var playlistId = ShowAddService.getPlaylistId();
-          //console.log(playlistId);
           $scope.focus = "youtube";
-          $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list=UUFQMG01CZHj5-XrcpKuLarg";
-          //$scope.youtubeurl = "https://www.youtube.com/embed/videoseries?list=UUFQMG01CZHj5-XrcpKuLarg&autoplay=1";
+          $scope.youtubeurl = "http://www.youtube.com/embed?autoplay=1&listType=playlist&enablejsapi=1&version=3&list=UUFQMG01CZHj5-XrcpKuLarg";    //$scope.youtubeurl = "https://www.youtube.com/embed/videoseries?list=UUFQMG01CZHj5-XrcpKuLarg&autoplay=1";
           $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
-
-        });
-
       });
 
-      // showAdd Off and go back to default view
+      // showAd Off and go back to default view
       AnnyangService.addCommand(command.noshowAdd, function() {
         var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
         iframe.postMessage('{"event":"command","func":"' + 'stopVideo' +   '","args":""}', '*');
@@ -233,7 +231,6 @@
           $scope.focus = "music";
           SoundCloudService.startVisualizer();
         });
-        timeOutView();
       });
 
       AnnyangService.addCommand(command.musicstop, function() {
@@ -247,14 +244,12 @@
         sound.play();
         SoundCloudService.startVisualizer();
         $scope.focus = "music";
-        timeOutView();
       });
       AnnyangService.addCommand(command.musicreplay, function() {
         sound.seek(0);
         sound.play();
         SoundCloudService.startVisualizer();
         $scope.focus = "music";
-        timeOutView();
       });
 
       AnnyangService.addCommand(command.musicstop, function() {
@@ -272,7 +267,6 @@
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
-        timeOutView();
       });
 
       AnnyangService.addCommand(command.ytbplaylist, function(term) {
@@ -285,7 +279,6 @@
             $scope.currentYoutubeUrl = $sce.trustAsResourceUrl($scope.youtubeurl);
           }
         });
-        timeOutView();
       });
 
       AnnyangService.addCommand(command.stopyoutube, function() {

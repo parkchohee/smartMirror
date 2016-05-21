@@ -10,7 +10,6 @@
           return $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search_term+"&key="+YOUTUBE_API_KEY + "&maxResults=30&type="+type).
               then(function(response) {
                   service.youtube = response.data;
-                  console.log(service.youtube);
                   return service.youtube;
               });
         };
